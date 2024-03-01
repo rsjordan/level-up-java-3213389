@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class App {
-    public static List<String> findStudentsWithIncompleteVolunteerEvents(
+    public static List<String> findStudentsWithIncompleteVolunteerEventsNoStreams(
             List<String> students,
             Map<String, List<String>> attendeesMapping) {
-                
+
         int COMPLETE_MINIMUM = 2;
 
         List<String> studentsWithIncompleteVolunteerEvents = new ArrayList<>();
@@ -32,6 +33,25 @@ public class App {
         }
         
         return studentsWithIncompleteVolunteerEvents;
+    }
+    
+    public static List<String> findStudentsWithIncompleteVolunteerEvents(
+            List<String> students,
+            Map<String, List<String>> attendeesMapping) {
+
+        int COMPLETE_MINIMUM = 2;
+
+        Map<String, Integer> studentsEventCount = students.stream()
+                                                    .collect(Collectors.toMap(s -> s, n -> 0));
+              
+        attendeesMapping.values().forEach(list -> list.stream()
+                                                    .filter(student -> studentsEventCount.containsKey(student))
+                                                    .forEach(student -> studentsEventCount.put(student,
+                                                                        studentsEventCount.get(student) + 1)));
+
+        return students.stream()
+                .filter(s -> studentsEventCount.get(s) < COMPLETE_MINIMUM)
+                .collect(Collectors.toList()); 
     }
 
     public static void main(String[] args) {
