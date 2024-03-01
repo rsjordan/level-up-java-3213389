@@ -9,32 +9,28 @@ public class App {
     public static List<String> findStudentsWithIncompleteVolunteerEvents(
             List<String> students,
             Map<String, List<String>> attendeesMapping) {
-
+                
         int COMPLETE_MINIMUM = 2;
-        // System.out.println("RSJ DEBUG - INPUT students: " + students);
-        // System.out.println("RSJ DEBUG - INPUT attendeesMapping: " + attendeesMapping);
 
         List<String> studentsWithIncompleteVolunteerEvents = new ArrayList<>();
 
-        Map<String, Integer> nameToCountMap = new HashMap<>();
+        Map<String, Integer> studentsEventCount = new HashMap<>();
         for (List<String> value : attendeesMapping.values()) {
             value.stream().forEach(name -> {
-                if (!nameToCountMap.containsKey(name)) {
-                    nameToCountMap.put(name, 1);
+                if (!studentsEventCount.containsKey(name)) {
+                    studentsEventCount.put(name, 1);
                 } else {
-                    nameToCountMap.put(name, nameToCountMap.get(name) + 1);
+                    studentsEventCount.put(name, studentsEventCount.get(name) + 1);
                 }
             });
         }
-        // System.out.println("RSJ DEBUG - nameToCountMap: " + nameToCountMap);
 
         for (String student : students) {
-            if (!nameToCountMap.containsKey(student) || (nameToCountMap.get(student) < COMPLETE_MINIMUM)) {
+            if (!studentsEventCount.containsKey(student) || (studentsEventCount.get(student) < COMPLETE_MINIMUM)) {
                 studentsWithIncompleteVolunteerEvents.add(student);
             }
         }
         
-        // System.out.println("RSJ DEBUG - studentsWithIncompleteVolunteerEvents: " + studentsWithIncompleteVolunteerEvents);
         return studentsWithIncompleteVolunteerEvents;
     }
 
