@@ -19,13 +19,11 @@ public class App {
         Map<String, Integer> nameToCountMap = new HashMap<>();
         for (List<String> value : attendeesMapping.values()) {
             value.stream().forEach(name -> {
-                int newCount;
                 if (!nameToCountMap.containsKey(name)) {
-                    newCount = 1;
+                    nameToCountMap.put(name, 1);
                 } else {
-                    newCount = nameToCountMap.get(name) + 1;
+                    nameToCountMap.put(name, nameToCountMap.get(name) + 1);
                 }
-                nameToCountMap.put(name, newCount);
             });
         }
         // System.out.println("RSJ DEBUG - nameToCountMap: " + nameToCountMap);
