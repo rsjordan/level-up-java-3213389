@@ -16,10 +16,22 @@ public class StoreItem {
   double discount;
 
   public static Optional<StoreItem> findLeastExpensive(Collection<StoreItem> items) {
-    // TODO: Implement
-    return Optional.empty();
+    Optional<StoreItem> retItem = items.stream().min(StoreItem::compareTo);
+  
+    return retItem;
   }
 
+  public int compareTo(StoreItem anotherItem) {
+    double diffPrice = this.retailPrice * (1 - this.discount)
+                        - anotherItem.retailPrice * (1 - anotherItem.discount);
+    if (diffPrice > 0) {
+      return 1;
+    } else if (diffPrice < 0) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
   @Override
   public String toString() {
     return "Name: " + name + ", " + "Retail price: " + retailPrice + ", " + "Discount " + discount;
