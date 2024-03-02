@@ -22,16 +22,12 @@ public class Team {
         .reduce(Integer::sum).orElse(0);
   }
 
-  public int getTotalScore() {
-    return getScores().stream().reduce(0, Integer::sum);
-  }
-
   public String getPlayerNames() {
     return player1 + "/" + player2;
   }
 
   public int compareTo(Team anotherTeam) {
-    int scoreDiff = this.getTotalScore() - anotherTeam.getTotalScore();
+    int scoreDiff = this.sumTotalScore() - anotherTeam.sumTotalScore();
     if (scoreDiff > 0) {
       return 1;
     } else if (scoreDiff < 0) {
@@ -42,7 +38,7 @@ public class Team {
   }
   
   public int reverseCompareTo(Team anotherTeam) {
-    int scoreDiff = this.getTotalScore() - anotherTeam.getTotalScore();
+    int scoreDiff = this.sumTotalScore() - anotherTeam.sumTotalScore();
     if (scoreDiff > 0) {
       return -1;
     } else if (scoreDiff < 0) {

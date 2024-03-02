@@ -29,6 +29,6 @@ public class TeamUtils {
     System.out.println("The winner is team " + sortedTeams.get(0).getPlayerNames() + "!");
     System.out.println("Complete results: ");
     sortedTeams.stream()
-      .forEach(t -> System.out.println("  " + t.getPlayerNames() + "\ttotal score: " + t.getTotalScore()));
+      .forEach(t -> System.out.println("  " + t.getPlayerNames() + "\ttotal score: " + t.sumTotalScore()));
   }
 }
