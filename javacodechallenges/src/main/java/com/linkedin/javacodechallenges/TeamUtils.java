@@ -13,8 +13,6 @@ public class TeamUtils {
       for (int i = 0; i < numberOfRounds; i++) {
         team.getScores().add(random.nextInt(11));
       }
-      //System.out.println("RSJ in generateTeamsScores(), " +
-      //    team.getPlayerNames() + " team score: " + team.getTotalScore());
     });
   }
 
@@ -32,6 +30,5 @@ public class TeamUtils {
     System.out.println("Complete results: ");
     sortedTeams.stream()
       .forEach(t -> System.out.println("  " + t.getPlayerNames() + "\ttotal score: " + t.getTotalScore()));
-    // System.out.println( "RSJ - in TeamUtils.revealResults, teams: " + sortedTeams );
   }
 }
