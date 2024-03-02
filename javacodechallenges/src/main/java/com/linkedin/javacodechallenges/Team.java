@@ -21,4 +21,34 @@ public class Team {
     return scores.stream().filter(score -> score > 0)
         .reduce(Integer::sum).orElse(0);
   }
+
+  public int getTotalScore() {
+    return getScores().stream().reduce(0, Integer::sum);
+  }
+
+  public String getPlayerNames() {
+    return player1 + "/" + player2;
+  }
+
+  public int compareTo(Team anotherTeam) {
+    int scoreDiff = this.getTotalScore() - anotherTeam.getTotalScore();
+    if (scoreDiff > 0) {
+      return 1;
+    } else if (scoreDiff < 0) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+  
+  public int reverseCompareTo(Team anotherTeam) {
+    int scoreDiff = this.getTotalScore() - anotherTeam.getTotalScore();
+    if (scoreDiff > 0) {
+      return -1;
+    } else if (scoreDiff < 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }
